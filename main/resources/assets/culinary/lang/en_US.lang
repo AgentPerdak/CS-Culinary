@@ -5,6 +5,9 @@ item.CupcakeLinerPack.name=Pack of Paper Cupcake Liners
 
 item.BakingPan.name=Baking Pan
 item.MuffinPan.name=Muffin Pan
+item.GlassBowl.name=Glass Bowl
+item.Whisk.name=Whisk
+item.PipingBag.name=Piping Bag
 
 item.CocoaPowderBag.name=Cocoa Powder Bag
 item.SaltBag.name=Salt Bag
@@ -12,6 +15,7 @@ item.PowderedSugarBag.name=Confectioners' Sugar Bag
 item.BakingSodaBag.name=Baking Soda Bag
 item.SugarBag.name=Sugar Bag
 item.AllPurposeFlourBag.name=All Purpose Flour Bag
+item.BakingPowderBag.name=Baking Powder Bag
 
 item.Butter.name=Butter
 
@@ -27,3 +31,12 @@ item.GreenColoring=Green Coloring
 
 item.MintChocolateCupcakesFlourMixture.name=Flour Mixture (Mint Chocolate Cupcakes)
 item.MintChocolateCupcakesLiquidMixture.name=Liquid Mixture (Mint Chocolate Cupcakes)
+item.MintChocolateCupcakesMixture.name=Cupcake Mixture (Mint Chocolate Cupcakes)
+item.MintChocolateCupcakesMuffinPan.name=Filled Muffin Pan (Mint Chocolate Cupcakes)
+item.MintChocolateCupcakesCookedMuffinPan.name=Muffin Pan (Mint Chocolate Cupcakes)
+item.MintChocolateCupcakesCookedNoFrost.name=Fresh Baked Cupcakes (Mint Chocolate Cupcakes)
+item.MintChocolateCupcakesFrosting.name=Frosting (Mint Chocolate Cupcakes)
+item.MintChocolateCupcakesFroster.name=Piping Bag with Frosting (Mint Chocolate Cupcakes)
+
+item.MintChocolateCupcake.name=Mint Chocolate Cupcake
+
