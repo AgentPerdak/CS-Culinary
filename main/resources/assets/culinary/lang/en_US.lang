@@ -1,0 +1,29 @@
+itemGroup.Culinary=CS'Culinary
+
+item.CupcakeLiner.name=Paper Cupcake Liner
+item.CupcakeLinerPack.name=Pack of Paper Cupcake Liners
+
+item.BakingPan.name=Baking Pan
+item.BakingPan.name=Muffin Pan
+
+item.CocoaPowderBag.name=Cocoa Powder Bag
+item.SaltBag.name=Salt Bag
+item.PowderedSugarBag.name=Confectioners' Sugar Bag
+item.BakingSodaBag.name=Baking Soda Bag
+item.SugarBag.name=Sugar Bag
+item.AllPurposeFlourBag.name=All Purpose Flour Bag
+
+item.Butter.name=Butter
+
+item.MilkBottle.name=Bottle of Milk
+item.BoilingWaterBottle.name=Bottle of Boiling Water
+item.HeavyCreamBottle.name=Bottle of Heavy Cream
+item.VegetableOilBottle.name=Bottle of Vegetable Oil
+
+item.PeppermintExtract.name=Peppermint Extract
+item.PureVanillaExtract.name=Pure Vanilla Extract
+
+item.GreenColoring=Green Coloring
+
+item.MintChocolateCupcakesFlourMixture.name=Flour Mixture (Mint Chocolate Cupcakes)
+item.MintChocolateCupcakesLiquidMixture.name=Liquid Mixture (Mint Chocolate Cupcakes)

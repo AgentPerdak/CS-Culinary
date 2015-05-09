@@ -1,0 +1,29 @@
+itemGroup.Culinary=СиЭс'Кулинария
+
+item.CupcakeLiner.name=Бумажные формочки для кексов
+item.CupcakeLinerPack.name=Пачка формочек для кексов
+
+item.BakingPan.name=Поднос для выпечки
+item.BakingPan.name=Поднос для кексов
+
+item.CocoaPowderBag.name=Мешочек с какао-порошком
+item.SaltBag.name=Мешочек с солью
+item.PowderedSugarBag.name=Мешочек с сахарной пудрой
+item.BakingSodaBag.name=Мешочек с поваренной содой
+item.SugarBag.name=Мешочек с сахаром
+item.AllPurposeFlourBag.name=Мешочек с мукой
+
+item.Butter.name=Сливочное масло
+
+item.MilkBottle.name=Бутылка молока
+item.BoilingWaterBottle.name=Бутылка кипяченой воды
+item.HeavyCreamBottle.name=Бутылка сливок
+item.VegetableOilBottle.name=Бутылка растительного масла
+
+item.PeppermintExtract.name=Мятная эссенция
+item.PureVanillaExtract.name=Ванильная эссенция
+
+item.GreenColoring=Зеленый пищевой краситель
+
+item.MintChocolateCupcakesFlourMixture.name=Мучная смесь (Мятно-шоколадные кексы)
+item.MintChocolateCupcakesLiquidMixture.name=Жидкая смесь (Мятно-шоколадные кексы)
