@@ -9,6 +9,8 @@ item.GlassBowl.name=Glass Bowl
 item.Whisk.name=Whisk
 item.PipingBag.name=Piping Bag
 
+item.Bag.name=Empty Bag
+
 item.CocoaPowderBag.name=Cocoa Powder Bag
 item.SaltBag.name=Salt Bag
 item.PowderedSugarBag.name=Confectioners' Sugar Bag
@@ -16,6 +18,8 @@ item.BakingSodaBag.name=Baking Soda Bag
 item.SugarBag.name=Sugar Bag
 item.AllPurposeFlourBag.name=All Purpose Flour Bag
 item.BakingPowderBag.name=Baking Powder Bag
+
+item.AllPurposeFlour.name=All Purpose Flour Powder
 
 item.Butter.name=Butter
 
@@ -39,4 +43,12 @@ item.MintChocolateCupcakesFrosting.name=Frosting (Mint Chocolate Cupcakes)
 item.MintChocolateCupcakesFroster.name=Piping Bag with Frosting (Mint Chocolate Cupcakes)
 
 item.MintChocolateCupcake.name=Mint Chocolate Cupcake
+
+item.Peppermint.name=Peppermint
+item.PeppermintSeeds.name=Peppermint Seeds
+tile.PeppermintPlant.name=Peppermint Crop
+
+item.Vanilla.name=Vanilla
+item.VanillaSeeds.name=Vanilla Seeds
+tile.VanillaPlant.name=Vanilla Crop
 

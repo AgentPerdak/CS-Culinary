@@ -10,9 +10,9 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class StrawberryCrop extends BlockCrops {
+public class VanillaCrop extends BlockCrops {
 
-    /*@SideOnly(Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     private IIcon[] iconArray;
 
     @SideOnly(Side.CLIENT)
@@ -37,14 +37,14 @@ public class StrawberryCrop extends BlockCrops {
     }
 
     public int quantityDropped (Random random) {
-        return 2;
+        return 1;
     }
 
     protected Item func_149866_i() {
-        return Culinary.cropStrawberrySeeds;
+        return Culinary.cropVanillaSeeds;
     }
 
     protected Item func_149865_P() {
-        return Culinary.cropStrawberry;
-    }*/
+        return Culinary.cropVanilla;
+    }
 }

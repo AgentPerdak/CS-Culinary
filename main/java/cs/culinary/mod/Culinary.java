@@ -9,7 +9,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import cs.culinary.mod.blocks.StrawberryCrop;
+import cs.culinary.mod.blocks.PeppermintCrop;
+import cs.culinary.mod.blocks.VanillaCrop;
 import cs.culinary.mod.items.CulinaryItems;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -37,6 +38,8 @@ public class Culinary {
     public static Item toolWhisk;
     public static Item toolPipingBag;
 
+    public static Item bag;
+
     public static Item ingredientAllPurposeFlourBag;
     public static Item ingredientSugarBag;
     public static Item ingredientCocoaPowderBag;
@@ -44,6 +47,8 @@ public class Culinary {
     public static Item ingredientSaltBag;
     public static Item ingredientPowderedSugarBag;
     public static Item ingredientBakingPowderBag;
+
+    public static Item ingredientAllPurposeFlour;
 
     public static Item butter;
 
@@ -58,7 +63,6 @@ public class Culinary {
     public static Item coloringGreen;
 
     //Recipes Shit
-
     public static Item recipeMintChocolateCupcakesFlourMixture;
     public static Item recipeMintChocolateCupcakesLiquidMixture;
     public static Item recipeMintChocolateCupcakesMixture;
@@ -71,9 +75,14 @@ public class Culinary {
     //Actually Food
     public static Item foodMintChocolateCupcake;
 
-    //public static Item cropStrawberrySeeds;
-    //public static Item cropStrawberry;
-    //public static Block cropStrawberryPlant;
+    //Actually Crops
+    public static Item cropPeppermint;
+    public static Item cropPeppermintSeeds;
+    public static Block cropPeppermintPlant;
+
+    public static Item  cropVanilla;
+    public static Item  cropVanillaSeeds;
+    public static Block cropVanillaPlant;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent preEvent){
@@ -81,7 +90,7 @@ public class Culinary {
         culinaryTab = new CreativeTabs("Culinary") {
             @SideOnly(Side.CLIENT)
             public Item getTabIconItem() {
-                return ingredientCocoaPowderBag;
+                return extractPeppermint;
             }
         };
 
@@ -102,6 +111,9 @@ public class Culinary {
         toolPipingBag = new CulinaryItems().setUnlocalizedName("PipingBag").setMaxStackSize(1).setCreativeTab(culinaryTab);
         GameRegistry.registerItem(toolPipingBag, "PipingBag");
 
+        bag = new CulinaryItems().setUnlocalizedName("Bag");
+        GameRegistry.registerItem(bag, "Bag");
+
         ingredientAllPurposeFlourBag = new CulinaryItems().setUnlocalizedName("AllPurposeFlourBag").setMaxDamage(10).setMaxStackSize(1);
         GameRegistry.registerItem(ingredientAllPurposeFlourBag, "AllPurposeFlourBag");
         ingredientSugarBag = new CulinaryItems().setUnlocalizedName("SugarBag").setMaxDamage(10).setMaxStackSize(1);
@@ -116,6 +128,9 @@ public class Culinary {
         GameRegistry.registerItem(ingredientPowderedSugarBag, "PowderedSugarBag");
         ingredientBakingPowderBag = new CulinaryItems().setUnlocalizedName("BakingPowderBag").setTextureName("SaltBag").setMaxDamage(10).setMaxStackSize(1);
         GameRegistry.registerItem(ingredientBakingPowderBag, "BakingPowderBag");
+
+        ingredientAllPurposeFlour = new CulinaryItems().setUnlocalizedName("AllPurposeFlour");
+        GameRegistry.registerItem(ingredientAllPurposeFlour, "AllPurposeFlour");
 
         butter = new CulinaryItems().setUnlocalizedName("Butter").setMaxDamage(20).setMaxStackSize(1);
         GameRegistry.registerItem(butter, "Butter");
@@ -156,20 +171,29 @@ public class Culinary {
         GameRegistry.registerItem(recipeMintChocolateCupcakesFroster, "MintChocolateCupcakesFroster");
 
         //Actually Food
-
         foodMintChocolateCupcake = new ItemFood(4, 1F, false).setUnlocalizedName("MintChocolateCupcake").setTextureName(modid + ":MintChocolateCupcake").setCreativeTab(culinaryTab);
         GameRegistry.registerItem(foodMintChocolateCupcake, "MintChocolateCupcake");
 
-        /*cropStrawberryPlant = new StrawberryCrop().setBlockName("StrawberryPlant");
-        cropStrawberrySeeds = new ItemSeeds(cropStrawberryPlant, Blocks.farmland).setUnlocalizedName("StrawberrySeeds").setTextureName(modid + ":StrawberrySeeds");
-        cropStrawberry = new ItemFood(1, 0.1F, false).setUnlocalizedName("Strawberry").setTextureName(modid + ":Strawberry");
-        GameRegistry.registerItem(cropStrawberrySeeds, "StrawberrySeeds");
-        GameRegistry.registerItem(cropStrawberry, "Strawberry");
-        GameRegistry.registerBlock(cropStrawberryPlant, "StrawberryPlant");*/
+        //Actually Crops
+        cropPeppermintPlant = new PeppermintCrop().setBlockName("PeppermintPlant");
+        cropPeppermintSeeds = new ItemSeeds(cropPeppermintPlant, Blocks.farmland).setUnlocalizedName("PeppermintSeeds").setTextureName(modid + ":PeppermintSeeds").setCreativeTab(culinaryTab);
+        cropPeppermint = new CulinaryItems().setUnlocalizedName("Peppermint").setTextureName(modid + ":Peppermint");
+        GameRegistry.registerItem( cropPeppermintSeeds, "PeppermintSeeds");
+        GameRegistry.registerItem( cropPeppermint,      "Peppermint");
+        GameRegistry.registerBlock(cropPeppermintPlant, "PeppermintPlant");
+
+        cropVanillaPlant = new VanillaCrop().setBlockName("VanillaPlant");
+        cropVanillaSeeds = new ItemSeeds(cropVanillaPlant, Blocks.farmland).setUnlocalizedName("VanillaSeeds").setTextureName(modid + ":VanillaSeeds").setCreativeTab(culinaryTab);;
+        cropVanilla = new CulinaryItems().setUnlocalizedName("Vanilla").setTextureName(modid + ":Vanilla");
+        GameRegistry.registerItem( cropVanillaSeeds, "VanillaSeeds");
+        GameRegistry.registerItem( cropVanilla,      "Vanilla");
+        GameRegistry.registerBlock(cropVanillaPlant, "VanillaPlant");
 
     }
     @Mod.EventHandler
     public void init(FMLInitializationEvent event){
+
+    GameRegistry.addRecipe(new ItemStack(ingredientAllPurposeFlourBag), new Object[]{"FFF", "FBF", "FFF", 'F', ingredientAllPurposeFlour, 'B', bag});
 
     GameRegistry.addShapelessRecipe(new ItemStack(recipeMintChocolateCupcakesFlourMixture), new Object[]{new ItemStack(toolGlassBowl), new ItemStack(ingredientSugarBag), new ItemStack(ingredientAllPurposeFlourBag), new ItemStack(ingredientCocoaPowderBag), new ItemStack(ingredientSaltBag), new ItemStack(ingredientBakingSodaBag), new ItemStack(ingredientBakingPowderBag)});
     GameRegistry.addShapelessRecipe(new ItemStack(recipeMintChocolateCupcakesLiquidMixture), new Object[]{new ItemStack(toolGlassBowl), new ItemStack(Items.egg), new ItemStack(bottleMilk), new ItemStack(bottleVegetableOil), new ItemStack(extractPeppermint), new ItemStack(extractPureVanilla)});
