@@ -35,3 +35,11 @@ item.MintChocolateCupcakesFrosting.name=Глазурь (Мятно-шокола�
 item.MintChocolateCupcakesFroster.name=Кондитерский мешок с глазьрью (Мятно-шоколадные кексы)
 
 item.MintChocolateCupcake.name=Мятно-шоколадные кексы
+
+item.Peppermint.name=Мята
+item.PeppermintSeeds.name=Семена мяты
+tile.PeppermintPlant.name=Мята
+
+item.Vanilla.name=Ваниль
+item.VanillaSeeds.name=Семена ванили
+tile.VanillaPlant.name=Ваниль
