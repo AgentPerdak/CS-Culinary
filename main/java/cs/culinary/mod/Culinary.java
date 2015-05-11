@@ -20,6 +20,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid = Culinary.modid, version = Culinary.version, name = "CS'Culinary")
 public class Culinary {
@@ -49,6 +50,11 @@ public class Culinary {
     public static Item ingredientBakingPowderBag;
 
     public static Item ingredientAllPurposeFlour;
+    public static Item ingredientCocoaPowder;
+    public static Item ingredientBakingSoda;
+    public static Item ingredientSalt;
+    public static Item ingredientPowderedSugar;
+    public static Item ingredientBakingPowder;
 
     public static Item butter;
 
@@ -131,6 +137,16 @@ public class Culinary {
 
         ingredientAllPurposeFlour = new CulinaryItems().setUnlocalizedName("AllPurposeFlour");
         GameRegistry.registerItem(ingredientAllPurposeFlour, "AllPurposeFlour");
+        ingredientCocoaPowder = new CulinaryItems().setUnlocalizedName("CocoaPowder");
+        GameRegistry.registerItem(ingredientCocoaPowder, "CocoaPowder");
+        ingredientBakingSoda = new CulinaryItems().setUnlocalizedName("BakingSoda");
+        GameRegistry.registerItem(ingredientBakingSoda, "BakingSoda");
+        ingredientSalt = new CulinaryItems().setUnlocalizedName("Salt");
+        GameRegistry.registerItem(ingredientSalt, "Salt");
+        ingredientPowderedSugar = new CulinaryItems().setUnlocalizedName("PowderedSugar");
+        GameRegistry.registerItem(ingredientPowderedSugar, "PowderedSugar");
+        ingredientBakingPowder = new CulinaryItems().setUnlocalizedName("BakingPowder");
+        GameRegistry.registerItem(ingredientBakingPowder, "BakingPowder");
 
         butter = new CulinaryItems().setUnlocalizedName("Butter").setMaxDamage(20).setMaxStackSize(1);
         GameRegistry.registerItem(butter, "Butter");
@@ -175,12 +191,14 @@ public class Culinary {
         GameRegistry.registerItem(foodMintChocolateCupcake, "MintChocolateCupcake");
 
         //Actually Crops
+
         cropPeppermintPlant = new PeppermintCrop().setBlockName("PeppermintPlant");
         cropPeppermintSeeds = new ItemSeeds(cropPeppermintPlant, Blocks.farmland).setUnlocalizedName("PeppermintSeeds").setTextureName(modid + ":PeppermintSeeds").setCreativeTab(culinaryTab);
         cropPeppermint = new CulinaryItems().setUnlocalizedName("Peppermint").setTextureName(modid + ":Peppermint");
         GameRegistry.registerItem( cropPeppermintSeeds, "PeppermintSeeds");
         GameRegistry.registerItem( cropPeppermint,      "Peppermint");
         GameRegistry.registerBlock(cropPeppermintPlant, "PeppermintPlant");
+        MinecraftForge.addGrassSeed(new ItemStack(cropPeppermintSeeds), 10);
 
         cropVanillaPlant = new VanillaCrop().setBlockName("VanillaPlant");
         cropVanillaSeeds = new ItemSeeds(cropVanillaPlant, Blocks.farmland).setUnlocalizedName("VanillaSeeds").setTextureName(modid + ":VanillaSeeds").setCreativeTab(culinaryTab);;
@@ -188,16 +206,37 @@ public class Culinary {
         GameRegistry.registerItem( cropVanillaSeeds, "VanillaSeeds");
         GameRegistry.registerItem( cropVanilla,      "Vanilla");
         GameRegistry.registerBlock(cropVanillaPlant, "VanillaPlant");
+        MinecraftForge.addGrassSeed(new ItemStack(cropVanillaSeeds), 10);
 
     }
     @Mod.EventHandler
     public void init(FMLInitializationEvent event){
 
+    GameRegistry.addRecipe(new ItemStack(linerCupcake), new Object[]{"PRP", "P", 'P', Items.paper, 'R', new ItemStack(Items.dye, 1, 1)});
+    GameRegistry.addRecipe(new ItemStack(linerCupcakePack), new Object[]{"LLL", "LLL", "LLL", 'L', linerCupcake});
+
+    GameRegistry.addRecipe(new ItemStack(toolGlassBowl), new Object[]{"G G", " G ", 'G', Blocks.glass});
+    GameRegistry.addRecipe(new ItemStack(toolWhisk), new Object[]{"  I", "II ", "II ", 'I', Items.iron_ingot});
+    GameRegistry.addRecipe(new ItemStack(toolPipingBag), new Object[]{" WW", " IW", "I ", 'I', Items.iron_ingot, 'W', Blocks.wool});
+    GameRegistry.addRecipe(new ItemStack(toolBakingPan), new Object[]{"III", 'I', Items.iron_ingot});
+    GameRegistry.addRecipe(new ItemStack(toolMuffinPan), new Object[]{"I I", "III", 'I', Items.iron_ingot});
+
+    GameRegistry.addRecipe(new ItemStack(bag), new Object[]{"S S", "S S", "WWW", 'S', Items.string, 'W', Blocks.wool});
+
     GameRegistry.addRecipe(new ItemStack(ingredientAllPurposeFlourBag), new Object[]{"FFF", "FBF", "FFF", 'F', ingredientAllPurposeFlour, 'B', bag});
+    GameRegistry.addRecipe(new ItemStack(ingredientSugarBag), new Object[]{"FFF", "FBF", "FFF", 'F', Items.sugar, 'B', bag});
+    GameRegistry.addRecipe(new ItemStack(ingredientCocoaPowderBag), new Object[]{"FFF", "FBF", "FFF", 'F', ingredientCocoaPowder, 'B', bag});
+    GameRegistry.addRecipe(new ItemStack(ingredientSaltBag), new Object[]{"FFF", "FBF", "FFF", 'F', ingredientSalt, 'B', bag});
+    GameRegistry.addRecipe(new ItemStack(ingredientBakingSodaBag), new Object[]{"FFF", "FBF", "FFF", 'F', ingredientBakingSoda, 'B', bag});
+    GameRegistry.addRecipe(new ItemStack(ingredientBakingPowderBag), new Object[]{"FFF", "FBF", "FFF", 'F', ingredientBakingPowder, 'B', bag});
+    GameRegistry.addRecipe(new ItemStack(ingredientPowderedSugarBag), new Object[]{"FFF", "FBF", "FFF", 'F', ingredientPowderedSugar, 'B', bag});
+
+    GameRegistry.addSmelting(bottleBoilingWater, new ItemStack(Items.potionitem, 0), 1F);
+    GameRegistry.addShapelessRecipe(new ItemStack(bottleMilk, 3), new ItemStack(Items.glass_bottle), new ItemStack(Items.glass_bottle), new ItemStack(Items.glass_bottle), new ItemStack(Items.milk_bucket));
 
     GameRegistry.addShapelessRecipe(new ItemStack(recipeMintChocolateCupcakesFlourMixture), new Object[]{new ItemStack(toolGlassBowl), new ItemStack(ingredientSugarBag), new ItemStack(ingredientAllPurposeFlourBag), new ItemStack(ingredientCocoaPowderBag), new ItemStack(ingredientSaltBag), new ItemStack(ingredientBakingSodaBag), new ItemStack(ingredientBakingPowderBag)});
     GameRegistry.addShapelessRecipe(new ItemStack(recipeMintChocolateCupcakesLiquidMixture), new Object[]{new ItemStack(toolGlassBowl), new ItemStack(Items.egg), new ItemStack(bottleMilk), new ItemStack(bottleVegetableOil), new ItemStack(extractPeppermint), new ItemStack(extractPureVanilla)});
-    GameRegistry.addShapelessRecipe(new ItemStack(recipeMintChocolateCupcakesMixture), new Object[]{new ItemStack(recipeMintChocolateCupcakesFlourMixture), new ItemStack(recipeMintChocolateCupcakesLiquidMixture), new ItemStack(bottleBoilingWater)});
+    GameRegistry.addShapelessRecipe(new ItemStack(recipeMintChocolateCupcakesMixture), new Object[]{new ItemStack(recipeMintChocolateCupcakesFlourMixture), new ItemStack(recipeMintChocolateCupcakesLiquidMixture), new ItemStack(bottleBoilingWater), new ItemStack(toolWhisk)});
     GameRegistry.addShapelessRecipe(new ItemStack(recipeMintChocolateCupcakesMuffinPan), new Object[]{new ItemStack(recipeMintChocolateCupcakesMixture), new ItemStack(toolMuffinPan), new ItemStack(linerCupcakePack)});
     GameRegistry.addSmelting(recipeMintChocolateCupcakesMuffinPan, new ItemStack(recipeMintChocolateCupcakesCookedMuffinPan), 10F);
     GameRegistry.addShapelessRecipe(new ItemStack(recipeMintChocolateCupcakesNoFrost, 9), new Object[]{new ItemStack(recipeMintChocolateCupcakesCookedMuffinPan)});

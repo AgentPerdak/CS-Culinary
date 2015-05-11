@@ -19,7 +19,12 @@ item.SugarBag.name=Sugar Bag
 item.AllPurposeFlourBag.name=All Purpose Flour Bag
 item.BakingPowderBag.name=Baking Powder Bag
 
-item.AllPurposeFlour.name=All Purpose Flour Powder
+item.CocoaPowder.name=Sifted Cocoa Powder
+item.Salt.name=Salt
+item.PowderedSugar.name=Confectioners' Sugar
+item.BakingSoda.name=Baking Soda
+item.AllPurposeFlour.name=All Purpose Flour
+item.BakingPowder.name=Baking Powder
 
 item.Butter.name=Butter
 
