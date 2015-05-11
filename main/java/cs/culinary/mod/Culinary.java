@@ -3,16 +3,24 @@ package cs.culinary.mod;
 //18.04.15.
 
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import cs.culinary.mod.blocks.EssenceExtractor;
 import cs.culinary.mod.blocks.PeppermintCrop;
+import cs.culinary.mod.blocks.PlasticOre;
 import cs.culinary.mod.blocks.VanillaCrop;
+import cs.culinary.mod.handler.GuiHandler;
 import cs.culinary.mod.items.CulinaryItems;
+import cs.culinary.mod.proxy.CommonProxy;
+import cs.culinary.mod.tileentity.TileEntityEssenceExtractor;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -28,10 +36,17 @@ public class Culinary {
     public static final String modid = "culinary";
     public static final String version = "1.0";
 
+    @Mod.Instance(modid)
+    public static Culinary instance;
+
     public static CreativeTabs culinaryTab;
 
-    public static Item linerCupcake;
-    public static Item linerCupcakePack;
+    public static Block blockEssenceExtractorIdle;
+    public static Block blockEssenceExtractorActive;
+    public static final int guiIDEssenceExtractor = 0;
+
+    public static Block orePlasticOre;
+    public static Item  orePlasticIngot;
 
     public static Item toolBakingPan;
     public static Item toolMuffinPan;
@@ -62,6 +77,11 @@ public class Culinary {
     public static Item bottleVegetableOil;
     public static Item bottleBoilingWater;
     public static Item bottleHeavyCream;
+    public static Item bottleVodka;
+    public static Item bottleEssenceBasis;
+
+    public static Item packPeppermint;
+    public static Item packVanilla;
 
     public static Item extractPeppermint;
     public static Item extractPureVanilla;
@@ -90,8 +110,11 @@ public class Culinary {
     public static Item  cropVanillaSeeds;
     public static Block cropVanillaPlant;
 
+    @SidedProxy(clientSide = "cs.culinary.mod.proxy.ClientProxy", serverSide = "cs.culinary.mod.proxy.CommonProxy")
+    public static CommonProxy culinaryProxy;
+
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent preEvent){
+    public void PreInit(FMLPreInitializationEvent preEvent){
 
         culinaryTab = new CreativeTabs("Culinary") {
             @SideOnly(Side.CLIENT)
@@ -100,11 +123,15 @@ public class Culinary {
             }
         };
 
-        linerCupcake = new CulinaryItems().setUnlocalizedName("CupcakeLiner");
-        GameRegistry.registerItem(linerCupcake, "CupcakeLiner");
+        blockEssenceExtractorIdle = new EssenceExtractor(false).setBlockName("EssenceExtractorIdle").setCreativeTab(culinaryTab).setHardness(3.5F);
+        blockEssenceExtractorActive = new EssenceExtractor(true).setBlockName("EssenceExtractorActive").setLightLevel(0.625F).setHardness(3.5F);
+        GameRegistry.registerBlock(blockEssenceExtractorActive, "EssenceExtractorActive");
+        GameRegistry.registerBlock(blockEssenceExtractorIdle, "EssenceExtractorIdle");
 
-        linerCupcakePack = new CulinaryItems().setUnlocalizedName("CupcakeLinerPack");
-        GameRegistry.registerItem(linerCupcakePack, "CupcakeLinerPack");
+        orePlasticOre = new PlasticOre(Material.rock).setBlockName("PlasticOre");
+        GameRegistry.registerBlock(orePlasticOre, "Plastic");
+        orePlasticIngot = new CulinaryItems().setUnlocalizedName("PlasticIngot");
+        GameRegistry.registerItem(orePlasticIngot, "PlasticIngot");
 
         toolBakingPan = new CulinaryItems().setUnlocalizedName("BakingPan").setMaxStackSize(1).setCreativeTab(culinaryTab);
         GameRegistry.registerItem(toolBakingPan, "BakingPan");
@@ -159,6 +186,15 @@ public class Culinary {
         GameRegistry.registerItem(bottleBoilingWater, "BoilingWaterBottle");
         bottleHeavyCream = new CulinaryItems().setUnlocalizedName("HeavyCreamBottle").setMaxDamage(10).setMaxStackSize(1);
         GameRegistry.registerItem(bottleHeavyCream, "HeavyCreamBottle");
+        bottleVodka = new CulinaryItems().setUnlocalizedName("VodkaBottle");
+        GameRegistry.registerItem(bottleVodka, "VodkaBottle");
+        bottleEssenceBasis = new CulinaryItems().setUnlocalizedName("EssenceBasis");
+        GameRegistry.registerItem(bottleEssenceBasis, "EssenceBasis");
+
+        packPeppermint = new CulinaryItems().setUnlocalizedName("PeppermintPack");
+        GameRegistry.registerItem(packPeppermint, "PeppermintPack");;
+        packVanilla = new CulinaryItems().setUnlocalizedName("VanillaPack");
+        GameRegistry.registerItem(packVanilla, "VanillaPack");
         
         extractPeppermint = new CulinaryItems().setUnlocalizedName("PeppermintExtract").setMaxDamage(30).setMaxStackSize(1);
         GameRegistry.registerItem(extractPeppermint, "PeppermintExtract");
@@ -191,7 +227,6 @@ public class Culinary {
         GameRegistry.registerItem(foodMintChocolateCupcake, "MintChocolateCupcake");
 
         //Actually Crops
-
         cropPeppermintPlant = new PeppermintCrop().setBlockName("PeppermintPlant");
         cropPeppermintSeeds = new ItemSeeds(cropPeppermintPlant, Blocks.farmland).setUnlocalizedName("PeppermintSeeds").setTextureName(modid + ":PeppermintSeeds").setCreativeTab(culinaryTab);
         cropPeppermint = new CulinaryItems().setUnlocalizedName("Peppermint").setTextureName(modid + ":Peppermint");
@@ -208,18 +243,21 @@ public class Culinary {
         GameRegistry.registerBlock(cropVanillaPlant, "VanillaPlant");
         MinecraftForge.addGrassSeed(new ItemStack(cropVanillaSeeds), 10);
 
+
+
     }
     @Mod.EventHandler
     public void init(FMLInitializationEvent event){
 
-    GameRegistry.addRecipe(new ItemStack(linerCupcake), new Object[]{"PRP", "P", 'P', Items.paper, 'R', new ItemStack(Items.dye, 1, 1)});
-    GameRegistry.addRecipe(new ItemStack(linerCupcakePack), new Object[]{"LLL", "LLL", "LLL", 'L', linerCupcake});
+    NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+
+    GameRegistry.registerTileEntity(TileEntityEssenceExtractor.class, "EssenceExtractor");
 
     GameRegistry.addRecipe(new ItemStack(toolGlassBowl), new Object[]{"G G", " G ", 'G', Blocks.glass});
-    GameRegistry.addRecipe(new ItemStack(toolWhisk), new Object[]{"  I", "II ", "II ", 'I', Items.iron_ingot});
-    GameRegistry.addRecipe(new ItemStack(toolPipingBag), new Object[]{" WW", " IW", "I ", 'I', Items.iron_ingot, 'W', Blocks.wool});
-    GameRegistry.addRecipe(new ItemStack(toolBakingPan), new Object[]{"III", 'I', Items.iron_ingot});
-    GameRegistry.addRecipe(new ItemStack(toolMuffinPan), new Object[]{"I I", "III", 'I', Items.iron_ingot});
+    GameRegistry.addRecipe(new ItemStack(toolWhisk), new Object[]{"  I", "II ", "II ", 'I', orePlasticIngot});
+    GameRegistry.addRecipe(new ItemStack(toolPipingBag), new Object[]{" WW", " IW", "I ", 'I', orePlasticIngot, 'W', Blocks.wool});
+    GameRegistry.addRecipe(new ItemStack(toolBakingPan), new Object[]{"III", 'I', orePlasticIngot});
+    GameRegistry.addRecipe(new ItemStack(toolMuffinPan), new Object[]{"I I", "III", 'I', orePlasticIngot});
 
     GameRegistry.addRecipe(new ItemStack(bag), new Object[]{"S S", "S S", "WWW", 'S', Items.string, 'W', Blocks.wool});
 
@@ -234,10 +272,16 @@ public class Culinary {
     GameRegistry.addSmelting(bottleBoilingWater, new ItemStack(Items.potionitem, 0), 1F);
     GameRegistry.addShapelessRecipe(new ItemStack(bottleMilk, 3), new ItemStack(Items.glass_bottle), new ItemStack(Items.glass_bottle), new ItemStack(Items.glass_bottle), new ItemStack(Items.milk_bucket));
 
+    GameRegistry.addShapelessRecipe(new ItemStack(bottleEssenceBasis, 2),new Object[]{new ItemStack(Items.potionitem, 1, 1), new ItemStack(bottleVodka)});
+    GameRegistry.addShapelessRecipe(new ItemStack(bottleEssenceBasis, 2),new Object[]{new ItemStack(bottleBoilingWater), new ItemStack(bottleVodka)});
+
+    GameRegistry.addRecipe(new ItemStack(packPeppermint),new Object[]{"MMM", "MMM", "MMM", 'M', cropPeppermint});
+    GameRegistry.addRecipe(new ItemStack(packVanilla),new Object[]{"MMM", "MMM", "MMM", 'M', cropVanilla});
+
     GameRegistry.addShapelessRecipe(new ItemStack(recipeMintChocolateCupcakesFlourMixture), new Object[]{new ItemStack(toolGlassBowl), new ItemStack(ingredientSugarBag), new ItemStack(ingredientAllPurposeFlourBag), new ItemStack(ingredientCocoaPowderBag), new ItemStack(ingredientSaltBag), new ItemStack(ingredientBakingSodaBag), new ItemStack(ingredientBakingPowderBag)});
     GameRegistry.addShapelessRecipe(new ItemStack(recipeMintChocolateCupcakesLiquidMixture), new Object[]{new ItemStack(toolGlassBowl), new ItemStack(Items.egg), new ItemStack(bottleMilk), new ItemStack(bottleVegetableOil), new ItemStack(extractPeppermint), new ItemStack(extractPureVanilla)});
     GameRegistry.addShapelessRecipe(new ItemStack(recipeMintChocolateCupcakesMixture), new Object[]{new ItemStack(recipeMintChocolateCupcakesFlourMixture), new ItemStack(recipeMintChocolateCupcakesLiquidMixture), new ItemStack(bottleBoilingWater), new ItemStack(toolWhisk)});
-    GameRegistry.addShapelessRecipe(new ItemStack(recipeMintChocolateCupcakesMuffinPan), new Object[]{new ItemStack(recipeMintChocolateCupcakesMixture), new ItemStack(toolMuffinPan), new ItemStack(linerCupcakePack)});
+    GameRegistry.addShapelessRecipe(new ItemStack(recipeMintChocolateCupcakesMuffinPan), new Object[]{new ItemStack(recipeMintChocolateCupcakesMixture), new ItemStack(toolMuffinPan)});
     GameRegistry.addSmelting(recipeMintChocolateCupcakesMuffinPan, new ItemStack(recipeMintChocolateCupcakesCookedMuffinPan), 10F);
     GameRegistry.addShapelessRecipe(new ItemStack(recipeMintChocolateCupcakesNoFrost, 9), new Object[]{new ItemStack(recipeMintChocolateCupcakesCookedMuffinPan)});
     GameRegistry.addShapelessRecipe(new ItemStack(recipeMintChocolateCupcakesFrosting), new Object[]{new ItemStack(ingredientPowderedSugarBag), new ItemStack(butter), new ItemStack(toolWhisk), new ItemStack(bottleHeavyCream), new ItemStack(extractPureVanilla), new ItemStack(extractPeppermint), new ItemStack(coloringGreen), new ItemStack(toolGlassBowl), new ItemStack(ingredientSaltBag)});

@@ -1,7 +1,11 @@
 itemGroup.Culinary=CS'Culinary
 
-item.CupcakeLiner.name=Paper Cupcake Liner
-item.CupcakeLinerPack.name=Pack of Paper Cupcake Liners
+tile.PlasticOre.name=CS'Plastic Ore
+item.PlasticIngot.name=CS'Plastic Ingot
+
+tile.EssenceExtractorIdle.name=Essence Extractor
+tile.EssenceExtractorActive.name=Essence Extractor (Active)
+container.essenceExtractor=Essence Extractor
 
 item.BakingPan.name=Baking Pan
 item.MuffinPan.name=Muffin Pan
@@ -32,11 +36,16 @@ item.MilkBottle.name=Bottle of Milk
 item.BoilingWaterBottle.name=Bottle of Boiling Water
 item.HeavyCreamBottle.name=Bottle of Heavy Cream
 item.VegetableOilBottle.name=Bottle of Vegetable Oil
+item.VodkaBottle.name=Bottle of Vodka
+item.EssenceBasis.name=Essence Basis
+
+item.PeppermintPack.name=Peppermint Pack
+item.VanillaPack.name=Vanilla Pack
 
 item.PeppermintExtract.name=Peppermint Extract
 item.PureVanillaExtract.name=Pure Vanilla Extract
 
-item.GreenColoring=Green Coloring
+item.GreenColoring.name=Green Coloring
 
 item.MintChocolateCupcakesFlourMixture.name=Flour Mixture (Mint Chocolate Cupcakes)
 item.MintChocolateCupcakesLiquidMixture.name=Liquid Mixture (Mint Chocolate Cupcakes)

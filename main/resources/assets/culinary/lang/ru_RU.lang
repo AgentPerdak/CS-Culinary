@@ -23,7 +23,7 @@ item.VegetableOilBottle.name=Бутылка растительного масл�
 item.PeppermintExtract.name=Мятная эссенция
 item.PureVanillaExtract.name=Ванильная эссенция
 
-item.GreenColoring=Зеленый пищевой краситель
+item.GreenColoring.name=Зеленый пищевой краситель
 
 item.MintChocolateCupcakesFlourMixture.name=Мучная смесь (Мятно-шоколадные кексы)
 item.MintChocolateCupcakesLiquidMixture.name=Жидкая смесь (Мятно-шоколадные кексы)
