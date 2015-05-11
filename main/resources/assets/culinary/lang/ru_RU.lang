@@ -35,3 +35,19 @@ item.MintChocolateCupcakesFrosting.name=Глазурь (Мятно-шокола�
 item.MintChocolateCupcakesFroster.name=Кондитерский мешок с глазьрью (Мятно-шоколадные кексы)
 
 item.MintChocolateCupcake.name=Мятно-шоколадные кексы
+
+tile.PlasticOre.name=CS'Пластиковая руда
+item.PlasticIngot.name=CS'Пластиковый слиток
+
+tile.EssenceExtractorIdle.name=Экстрактор эссенции
+tile.EssenceExtractorActive.name=Экстрактор эссенции (АКТИВИРОВАННЫЙ)
+container.essenceExtractor=Экстрактор эссенции
+
+item.VodkaBottle.name=Водка
+item.EssenceBasis.name=Базис Эссенция
+
+item.PeppermintPack.name=Пачка мяты
+item.VanillaPack.name=Пачкa ванили
+  
+item.PeppermintExtract.name=Мятный кэкстракт
+item.PureVanillaExtract.name=Pure Ванильный экстракт
